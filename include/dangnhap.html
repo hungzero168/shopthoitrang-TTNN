@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng nhập - Zofal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="../js/dangnhap.js"></script>
+  <link rel="stylesheet" href="../css/dangnhap.css">
+
+</head>
+<body>
+  <div class="container">
+    <div class="login-container">
+      <div class="login-header">
+        <img src="logo.png" alt="Zofal Logo">
+        <h2>Đăng nhập</h2>
+      </div>
+      
+      <form>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="Nhập email của bạn">
+        </div>
+        
+        <div class="mb-3">
+          <label for="password" class="form-label">Mật khẩu</label>
+          <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu">
+        </div>
+        
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="remember">
+          <label class="form-check-label" for="remember">Ghi nhớ đăng nhập</label>
+          <!-- <a href="#" class="float-end">Quên mật khẩu?</a> -->
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-login">Đăng nhập</button>
+        
+        <div class="text-center mt-3">
+          Chưa có tài khoản? <a href="#">Đăng ký ngay</a>
+        </div>
+        
+        <!-- <div class="social-login">
+          <p class="text-muted">Hoặc đăng nhập với</p>
+          <a href="#" class="social-btn facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="social-btn google">
+            <i class="fab fa-google"></i>
+          </a>
+        </div> -->
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

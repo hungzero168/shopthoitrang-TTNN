@@ -1,0 +1,434 @@
+:root {
+    --primary-color: #2a6fb4;
+    --secondary-color: #0098fd;
+    --accent-color: #e74c3c;
+    --light-bg: #f5f6fa;
+}
+
+.slick-prev:before,
+.slick-next:before {
+    color: var(--primary-color);
+}
+
+.slick-prev {
+    left: -25px;
+}
+
+.slick-next {
+    right: -25px;
+}
+
+.category-circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.category-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.categories-slider .card {
+    border: none;
+    background: transparent;
+    width: 100%;
+}
+
+.categories-slider .card-body {
+    padding: 1rem 0;
+}
+
+.categories-slider {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.categories-slider .px-2 {
+    flex: 1;
+    width: 0;
+}
+
+.logo h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo h1:hover {
+    transform: scale(1.05);
+    letter-spacing: 3px;
+}
+
+.product-card .card-img-top {
+    min-height: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.product-card .card-title {
+    min-height: 48px;
+    height: 48px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.product-card .price {
+    min-height: 40px;
+    height: 40px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    background-color: var(--light-bg);
+}
+
+.navbar {
+    background-color: var(--light-bg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+}
+
+.navbar-brand img {
+    max-height: 50px;
+}
+
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('img/fashion-clothes-accessories-seamless-pattern_1284-3636.jpg') no-repeat center center;
+    background-size: cover;
+    color: white;
+    padding: 100px 0;
+}
+
+.product-card {
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, .1);
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .15);
+}
+
+.newsletter {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+}
+
+footer {
+    background-color: #343a40;
+}
+
+/* Thêm hiệu ứng cho các mục trong Navigation */
+.nav-item .nav-link {
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s ease;
+}
+
+.nav-item .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.nav-item .nav-link:hover {
+    color: var(--primary-color);
+}
+
+.nav-item .nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+body {
+    background-color: var(--light-bg);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.profile-section {
+    background: linear-gradient(135deg, #fff 0%, var(--light-bg) 100%);
+    padding: 40px 0;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.profile-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-cover {
+    height: 120px;
+    background: linear-gradient(45deg,
+            var(--secondary-color),
+            var(--primary-color));
+}
+
+.profile-image {
+    width: 120px;
+    height: 120px;
+    border: 4px solid #fff;
+    margin-top: -60px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.list-group-item {
+    border: none;
+    padding: 15px 25px;
+    margin-bottom: 8px;
+    border-radius: 12px !important;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.list-group-item:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+    transform: translateX(8px);
+}
+
+.list-group-item.active {
+    background: linear-gradient(45deg,
+            var(--secondary-color),
+            var(--primary-color));
+    border: none;
+}
+
+.form-control {
+    border-radius: 12px;
+    padding: 12px 20px;
+    border: 2px solid #eee;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.15);
+}
+
+.btn {
+    padding: 12px 30px;
+    border-radius: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.4s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg,
+            var(--secondary-color),
+            var(--primary-color));
+    border: none;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+}
+
+.table {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.table thead th {
+    background: linear-gradient(45deg,
+            var(--primary-color),
+            var(--secondary-color));
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    padding: 20px;
+}
+
+.badge {
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.modal-content {
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    background: linear-gradient(45deg,
+            var(--primary-color),
+            var(--secondary-color));
+    color: #fff;
+    border: none;
+    padding: 25px;
+    border-radius: 20px 20px 0 0;
+}
+
+.modal-footer {
+    border-top: 1px solid #eee;
+    padding: 25px;
+}
+
+.nav-tabs {
+    border: none;
+    margin-bottom: 30px;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    padding: 15px 30px;
+    border-radius: 12px;
+    font-weight: 600;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link.active {
+    background: linear-gradient(45deg,
+            var(--secondary-color),
+            var(--primary-color));
+    color: #fff;
+}
+
+.order-status {
+    position: relative;
+    padding-left: 25px;
+}
+
+.order-status:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: currentColor;
+}
+
+.stats-card {
+    background: linear-gradient(45deg,
+            var(--primary-color),
+            var(--secondary-color));
+    color: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.stats-card h3 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.stats-card p {
+    opacity: 0.8;
+    margin: 0;
+}
+
+/* Thêm CSS cho dropdown hover */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu {
+    margin-top: 0;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .navbar-nav {
+        text-align: center;
+    }
+
+    .product-card {
+        margin-bottom: 20px;
+    }
+
+    .product-card .card-body {
+        padding: 0.75rem;
+    }
+
+    .product-card .card-title {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .product-card .price {
+        font-size: 0.85rem;
+    }
+
+    .product-card .product-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .product-card .product-actions button {
+        width: 100%;
+        padding: 0.25rem;
+        font-size: 0.8rem;
+    }
+
+    .product-card .badge {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    .newsletter h2 {
+        font-size: 24px;
+    }
+
+    .main-header .row {
+        flex-wrap: nowrap;
+    }
+
+    .main-header .logo img {
+        max-height: 40px;
+    }
+
+    .main-header .user-actions {
+        display: flex;
+        align-items: center;
+    }
+
+    .main-header .user-actions .btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+}

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang cá nhân - Zofal</title>
+    <!-- <link rel="stylesheet" href="../css/style.css" /> -->
+    <link rel="stylesheet" href="../css/trangcanhan.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="../js/trangcanhan.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+      
+    </style>
+
+    <script>
+      
+    </script>
+  </head>
+  <body>
+    <!-- Top Bar -->
+    <div
+      class="top-bar py-3"
+      style="
+        background: linear-gradient(
+          45deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+      "
+    >
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <span class="text-white me-4"
+              ><i class="fas fa-phone-alt me-2"></i>0123 456 789</span
+            >
+            <span class="text-white"
+              ><i class="fas fa-envelope me-2"></i>contact@zofal.com</span
+            >
+          </div>
+          <div class="col-md-6 text-end">
+            <a href="#" class="text-white me-3"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" class="text-white me-3"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" class="text-white"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white py-4 shadow-sm">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-3">
+            <a href="../index.html" style="text-decoration: none">
+              <h1
+                style="
+                  font-size: 2.5rem;
+                  font-weight: bold;
+                  margin: 0;
+                  background: linear-gradient(
+                    45deg,
+                    var(--primary-color),
+                    var(--secondary-color)
+                  );
+                  -webkit-background-clip: text;
+                  -webkit-text-fill-color: transparent;
+                "
+              >
+                ZOFAL
+              </h1>
+            </a>
+          </div>
+          <div class="col-lg-6">
+            <div class="search-bar">
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Tìm kiếm sản phẩm..."
+                  id="searchInput"
+                />
+                <button class="btn btn-primary" onclick="window.location.href='sanpham.html?search=' + document.getElementById('searchInput').value">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-3 text-end user-actions">
+            <a href="dangnhap.html" class="btn btn-outline-secondary me-2">
+              <i class="far fa-user"></i> Tài khoản
+            </a>
+            <a href="giohang.html" class="btn btn-primary position-relative">
+              <i class="fas fa-shopping-cart"></i>
+              <!-- Giỏ hàng -->
+              <span
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                id="cart-count"
+                >0</span
+              >
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+      <div class="container">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="nav-link px-4" href="../index.html">Trang chủ</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link px-4" href="sanpham.html">
+                Sản phẩm <i class="fas fa-chevron-down"></i>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="sanpham.html?category=aokhoac">Áo khoác</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="sanpham.html?category=aothun">Áo thun</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="sanpham.html?category=quan">Quần</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="sanpham.html?category=vaydam">Váy đầm</a>
+                </li>
+              </ul>
+            </li>
+
+
+            <li class="nav-item">
+              <a class="nav-link px-4" href="#">Liên hệ</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Profile Section -->
+    <section class="profile-section">
+      <div class="container">
+        <div class="row g-4">
+          <!-- Sidebar -->
+          <div class="col-lg-3">
+            <div class="card profile-card">
+              <div class="profile-cover"></div>
+              <div class="card-body text-center">
+                <img
+                  src="../img/img_per.png"
+                  class="rounded-circle profile-image mb-4"
+                  alt="Avatar"
+                />
+                <h5 class="fw-bold mb-1">Nguyễn Văn A</h5>
+                <p class="text-muted small mb-4">Thành viên từ: 01/01/2024</p>
+
+                <div class="list-group">
+                  <a
+                    href="#profile"
+                    class="list-group-item list-group-item-action active"
+                    data-bs-toggle="list"
+                  >
+                    <i class="fas fa-user-circle me-3"></i>Thông tin cá nhân
+                  </a>
+                  <a
+                    href="#orders"
+                    class="list-group-item list-group-item-action"
+                    data-bs-toggle="list"
+                  >
+                    <i class="fas fa-shopping-bag me-3"></i>Đơn hàng của tôi
+                  </a>
+                  <!-- <a
+                    href="#wishlist"
+                    class="list-group-item list-group-item-action"
+                  >
+                    <i class="fas fa-heart me-3"></i>Sản phẩm yêu thích
+                  </a> -->
+                  <a
+                    href="#"
+                    class="list-group-item list-group-item-action text-danger"
+                  >
+                    <i class="fas fa-sign-out-alt me-3"></i>Đăng xuất
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Content -->
+          <div class="col-lg-9">
+            <div class="tab-content">
+              <!-- Profile Tab -->
+              <!-- <div class="tab-pane fade show active" id="profile">
+                <div class="row g-4 mb-4">
+                  <div class="col-md-4">
+                    <div class="stats-card">
+                      <i class="fas fa-shopping-cart mb-3 fa-2x"></i>
+                      <h3>12</h3>
+                      <p>Tổng đơn hàng</p>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="stats-card">
+                      <i class="fas fa-heart mb-3 fa-2x"></i>
+                      <h3>8</h3>
+                      <p>Sản phẩm yêu thích</p>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="stats-card">
+                      <i class="fas fa-medal mb-3 fa-2x"></i>
+                      <h3>Silver</h3>
+                      <p>Hạng thành viên</p>
+                    </div>
+                  </div>
+                </div> -->
+
+                <div class="card">
+                  <div class="card-header bg-white py-4">
+                    <h5 class="mb-0 fw-bold">Thông tin cá nhân</h5>
+                  </div>
+                  <div class="card-body p-4">
+                    <form id="profileForm">
+                      <div class="row g-4">
+                        <div class="col-md-6">
+                          <label class="form-label">Họ và tên</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            name="full_name"
+                            value="Nguyễn Văn A"
+                          />
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">Email</label>
+                          <input
+                            type="email"
+                            class="form-control"
+                            name="email"
+                            value="nguyenvana@email.com"
+                            readonly
+                          />
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">Số điện thoại</label>
+                          <input
+                            type="tel"
+                            class="form-control"
+                            name="phone"
+                            value="0123456789"
+                          />
+                        </div>
+
+                        <div class="col-12">
+                          <label class="form-label">Địa chỉ</label>
+                          <textarea
+                            class="form-control"
+                            name="address"
+                            rows="3"
+                          >123 Đường ABC, Quận XYZ, TP.HCM</textarea>
+                        </div>
+                      </div>
+                      <div class="mt-4">
+                        <button type="submit" class="btn btn-primary">
+                          <i class="fas fa-save me-2"></i>Cập nhật thông tin
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Orders Tab -->
+              <div class="tab-pane fade" id="orders">
+                <div class="card">
+                  <div class="card-header bg-white py-4">
+                    <h5 class="mb-0 fw-bold">Đơn hàng của tôi</h5>
+                  </div>
+                  <div class="card-body p-4">
+                    <div class="table-responsive">
+                      <table class="table align-middle">
+                        <thead>
+                          <tr>
+                            <th>Mã đơn hàng</th>
+                            <th>Ngày đặt</th>
+                            <th>Tổng tiền</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>#ORD001</td>
+                            <td>01/01/2024</td>
+                            <td class="fw-bold">1.199.000đ</td>
+                            <td>
+                              <span class="badge bg-success">Đã giao</span>
+                            </td>
+                            <td>
+                              <button
+                                class="btn btn-sm btn-primary"
+                                onclick="showOrderDetail('ORD001')"
+                              >
+                                <i class="fas fa-eye me-2"></i>Chi tiết
+                              </button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>#ORD002</td>
+                            <td>05/01/2024</td>
+                            <td class="fw-bold">599.000đ</td>
+                            <td>
+                              <span class="badge bg-warning">Đang giao</span>
+                            </td>
+                            <td>
+                              <button
+                                class="btn btn-sm btn-primary"
+                                onclick="showOrderDetail('ORD002')"
+                              >
+                                <i class="fas fa-eye me-2"></i>Chi tiết
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Order Detail Modal -->
+    <div class="modal fade" id="orderDetailModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Chi tiết đơn hàng #ORD001</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body p-4">
+            <div class="row g-4 mb-4">
+              <div class="col-md-6">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h6 class="fw-bold mb-3">Thông tin giao hàng</h6>
+                    <p class="mb-2">
+                      <i class="fas fa-user me-2"></i>Nguyễn Văn A
+                    </p>
+                    <p class="mb-2">
+                      <i class="fas fa-map-marker-alt me-2"></i>123 Đường ABC,
+                      Quận XYZ, TP.HCM
+                    </p>
+                    <p class="mb-0">
+                      <i class="fas fa-phone me-2"></i>0123456789
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h6 class="fw-bold mb-3">Thông tin đơn hàng</h6>
+                    <p class="mb-2">
+                      <i class="fas fa-calendar me-2"></i>Ngày đặt: 01/01/2024
+                    </p>
+                    <p class="mb-2">
+                      <i class="fas fa-truck me-2"></i>Trạng thái: Đã giao
+                    </p>
+                    <p class="mb-0">
+                      <i class="fas fa-money-bill-wave me-2"></i>Thanh toán: COD
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Đơn giá</th>
+                    <th>Thành tiền</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <img
+                          src="../img/product-placeholder.jpg"
+                          alt="Product"
+                          class="rounded me-3"
+                          style="width: 60px; height: 60px; object-fit: cover"
+                        />
+                        <div>
+                          <h6 class="mb-0">Áo khoác denim</h6>
+                          <small class="text-muted">Size: L | Màu: Xanh</small>
+                        </div>
+                      </div>
+                    </td>
+                    <td>1</td>
+                    <td>599.000đ</td>
+                    <td class="fw-bold">599.000đ</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <img
+                          src="../img/product-placeholder.jpg"
+                          alt="Product"
+                          class="rounded me-3"
+                          style="width: 60px; height: 60px; object-fit: cover"
+                        />
+                        <div>
+                          <h6 class="mb-0">Áo len nữ</h6>
+                          <small class="text-muted">Size: M | Màu: Đen</small>
+                        </div>
+                      </div>
+                    </td>
+                    <td>1</td>
+                    <td>599.000đ</td>
+                    <td class="fw-bold">599.000đ</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="3" class="text-end">
+                      <strong>Tổng cộng:</strong>
+                    </td>
+                    <td><strong>1.199.000đ</strong></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Đóng
+            </button>
+            <button type="button" class="btn btn-primary">
+              <i class="fas fa-download me-2"></i>Tải hóa đơn
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5 mt-5">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <h5 class="fw-bold mb-4">Về Zofal</h5>
+            <p class="text-white-50">
+              Zofal là thương hiệu thời trang hàng đầu Việt Nam, cung cấp những
+              sản phẩm thời trang chất lượng cao với giá cả hợp lý.
+            </p>
+            <div class="social-links mt-4">
+              <a href="#" class="text-white me-3"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="text-white me-3"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="text-white me-3"
+                ><i class="fab fa-tiktok"></i
+              ></a>
+              <a href="#" class="text-white"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="fw-bold mb-4">Liên kết nhanh</h5>
+            <ul class="list-unstyled">
+              <li class="mb-3">
+                <a href="../index.html" class="text-white-50 text-decoration-none">
+                  <i class="fas fa-chevron-right me-2"></i>Trang chủ
+                </a>
+              </li>
+              <li class="mb-3">
+                <a href="sanpham.html" class="text-white-50 text-decoration-none">
+                  <i class="fas fa-chevron-right me-2"></i>Sản phẩm
+                </a>
+              </li>
+              <li class="mb-3">
+                <a href="#" class="text-white-50 text-decoration-none">
+                  <i class="fas fa-chevron-right me-2"></i>Về chúng tôi
+                </a>
+              </li>
+              <li class="mb-3">
+                <a href="#" class="text-white-50 text-decoration-none">
+                  <i class="fas fa-chevron-right me-2"></i>Liên hệ
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="fw-bold mb-4">Thông tin liên hệ</h5>
+            <div class="contact-info text-white-50">
+              <p class="mb-3">
+                <i class="fas fa-map-marker-alt me-3"></i>
+                123 Đường ABC, Quận XYZ, TP.HCM
+              </p>
+              <p class="mb-3">
+                <i class="fas fa-phone-alt me-3"></i>
+                0123 456 789
+              </p>
+              <p class="mb-3">
+                <i class="fas fa-envelope me-3"></i>
+                contact@zofal.com
+              </p>
+              <p class="mb-0">
+                <i class="fas fa-clock me-3"></i>
+                Thứ 2 - Chủ nhật: 9:00 - 21:00
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+
+      function showOrderDetail(orderId) {
+        $("#orderDetailModal").modal("show");
+      }
+
+      // Initialize tooltips
+      // var tooltipTriggerList = [].slice.call(
+      //   document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      // );
+      // var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      //   return new bootstrap.Tooltip(tooltipTriggerEl);
+      // });
+    </script>
+  </body>
+</html>

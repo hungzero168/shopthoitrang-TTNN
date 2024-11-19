@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giỏ hàng - Zofal</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/giohang.js"></script>
+    <style>
+      :root {
+        --primary-color: #2a6fb4;
+        --secondary-color: #0098fd;
+        --accent-color: #e74c3c;
+        --light-bg: #f5f6fa;
+      }
+
+      body {
+        background-color: var(--light-bg);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .cart-section {
+        padding: 40px 0;
+      }
+
+      .cart-item {
+        background: #fff;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease;
+      }
+
+      .cart-item:hover {
+        transform: translateY(-5px);
+      }
+
+      .cart-item img {
+        border-radius: 10px;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+      }
+
+      .cart-summary {
+        background: #fff;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      }
+
+      .btn-primary {
+        background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        border: none;
+        padding: 12px 25px;
+        border-radius: 10px;
+      }
+
+      .btn-primary:hover {
+        opacity: 0.9;
+        transform: translateY(-2px);
+      }
+
+      .modal-content {
+        border-radius: 15px;
+      }
+
+      .modal-header {
+        background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        border-radius: 15px 15px 0 0;
+      }
+
+      .form-control {
+        border-radius: 10px;
+        padding: 12px;
+        border: 2px solid #eee;
+      }
+
+      .form-control:focus {
+        border-color: var(--secondary-color);
+        box-shadow: none;
+      }
+
+      .dropdown:hover .dropdown-menu {
+        display: block;
+      }
+    </style>
+    <script>
+      // Create logout button
+      const logoutButton = document.createElement("a");
+      logoutButton.classList.add("btn", "btn-outline-secondary", "me-2");
+      logoutButton.innerHTML = '<i class="fas fa-sign-out-alt"></i>';
+      logoutButton.style.display = "none";
+
+      // Function to check login status and redirect if not logged in
+      function checkLoginStatus() {
+        const sessionPath = window.location.pathname.includes("/include/")
+          ? "../php/check_session.php"
+          : "php/check_session.php";
+
+        fetch(sessionPath)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Session data:", data);
+            if (!data.loggedIn) {
+              // Redirect to login page if not logged in
+              window.location.href = window.location.pathname.includes(
+                "/include/"
+              )
+                ? "dangnhap.html"
+                : "include/dangnhap.html";
+            } else {
+              // Update UI for logged in user
+              const userButton = document.querySelector(
+                ".user-actions .btn-outline-secondary"
+              );
+              userButton.href = window.location.pathname.includes("/include/")
+                ? "trangcanhan.html"
+                : "include/trangcanhan.html";
+              userButton.innerHTML = '<i class="far fa-user"></i>';
+
+              // Show logout button
+              logoutButton.style.display = "inline-block";
+              userButton.parentNode.insertBefore(
+                logoutButton,
+                userButton.nextSibling
+              );
+
+              // Add logout handler
+              logoutButton.addEventListener("click", function (e) {
+                e.preventDefault();
+                const logoutPath = window.location.pathname.includes(
+                  "/include/"
+                )
+                  ? "../php/dangxuat.php"
+                  : "php/dangxuat.php";
+                fetch(logoutPath)
+                  .then((response) => response.json())
+                  .then((data) => {
+                    if (data.success) {
+                      window.location.href = window.location.pathname.includes(
+                        "/include/"
+                      )
+                        ? "../index.html"
+                        : "index.html";
+                    }
+                  })
+                  .catch((error) => console.error("Error logging out:", error));
+              });
+            }
+          })
+          .catch((error) => {
+            console.error("Error checking login status:", error);
+          });
+      }
+
+      // Check login status when page loads
+      document.addEventListener("DOMContentLoaded", checkLoginStatus);
+    </script>
+  </head>
+  <body>
+     <!-- Top Bar -->
+     <div
+     class="top-bar py-3"
+     style="
+       background: linear-gradient(
+         45deg,
+         var(--primary-color),
+         var(--secondary-color)
+       );
+     "
+   >
+     <div class="container">
+       <div class="row align-items-center">
+         <div class="col-md-6">
+           <span class="text-white me-4"
+             ><i class="fas fa-phone-alt me-2"></i>0123 456 789</span
+           >
+           <span class="text-white"
+             ><i class="fas fa-envelope me-2"></i>contact@zofal.com</span
+           >
+         </div>
+         <div class="col-md-6 text-end">
+           <a href="#" class="text-white me-3"
+             ><i class="fab fa-facebook-f"></i
+           ></a>
+           <a href="#" class="text-white me-3"
+             ><i class="fab fa-instagram"></i
+           ></a>
+           <a href="#" class="text-white"><i class="fab fa-tiktok"></i></a>
+         </div>
+       </div>
+     </div>
+   </div>
+
+   <!-- Header -->
+   <header class="bg-white py-4 shadow-sm">
+     <div class="container">
+       <div class="row align-items-center">
+         <div class="col-lg-3">
+           <a href="../index.html" style="text-decoration: none">
+             <h1
+               style="
+                 font-size: 2.5rem;
+                 font-weight: bold;
+                 margin: 0;
+                 background: linear-gradient(
+                   45deg,
+                   var(--primary-color),
+                   var(--secondary-color)
+                 );
+                 -webkit-background-clip: text;
+                 -webkit-text-fill-color: transparent;
+               "
+             >
+               ZOFAL
+             </h1>
+           </a>
+         </div>
+         <div class="col-lg-6">
+          <div class="search-bar">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Tìm kiếm sản phẩm..."
+                id="searchInput"
+              />
+              <button class="btn btn-primary" onclick="window.location.href='sanpham.html?search=' + document.getElementById('searchInput').value">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+         <div class="col-3 text-end user-actions">
+           <a href="dangnhap.html" class="btn btn-outline-secondary me-2">
+             <i class="far fa-user"></i> Tài khoản
+           </a>
+           <a href="giohang.html" class="btn btn-primary position-relative">
+             <i class="fas fa-shopping-cart"></i>
+             <!-- Giỏ hàng -->
+             <span
+               class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+               id="cart-count"
+               >0</span
+             >
+           </a>
+         </div>
+       </div>
+     </div>
+   </header>
+
+   <!-- Navigation -->
+   <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+     <div class="container">
+       <button
+         class="navbar-toggler"
+         type="button"
+         data-bs-toggle="collapse"
+         data-bs-target="#navbarNav"
+       >
+         <span class="navbar-toggler-icon"></span>
+       </button>
+       <div class="collapse navbar-collapse" id="navbarNav">
+         <ul class="navbar-nav mx-auto">
+           <li class="nav-item">
+             <a class="nav-link px-4" href="../index.html">Trang chủ</a>
+           </li>
+           <li class="nav-item dropdown">
+             <a class="nav-link px-4" href="sanpham.html">
+               Sản phẩm <i class="fas fa-chevron-down"></i>
+             </a>
+             <ul class="dropdown-menu">
+               <li>
+                 <a class="dropdown-item" href="sanpham.html?category=aokhoac"
+                   >Áo khoác</a
+                 >
+               </li>
+               <li>
+                 <a class="dropdown-item" href="sanpham.html?category=aothun"
+                   >Áo thun</a
+                 >
+               </li>
+               <li>
+                 <a class="dropdown-item" href="sanpham.html?category=quan"
+                   >Quần</a
+                 >
+               </li>
+               <li>
+                 <a class="dropdown-item" href="sanpham.html?category=vaydam"
+                   >Váy đầm</a
+                 >
+               </li>
+             </ul>
+           </li>
+
+           <li class="nav-item">
+             <a class="nav-link px-4" href="#">Liên hệ</a>
+           </li>
+         </ul>
+       </div>
+     </div>
+   </nav>
+
+    <!-- Cart Section -->
+    <section class="cart-section">
+      <div class="container">
+        <h2 class="text-center mb-4">Giỏ hàng của bạn</h2>
+        
+        <div class="row">
+          <div class="col-md-8">
+            <div class="cart-items">
+              <!-- Cart items will be loaded here -->
+            </div>
+          </div>
+          
+          <div class="col-md-4">
+            <div class="cart-summary">
+              <h4>Tổng đơn hàng</h4>
+              <div class="d-flex justify-content-between my-3">
+                <span>Tạm tính:</span>
+                <span class="subtotal">0 VNĐ</span>
+              </div>
+              <div class="d-flex justify-content-between mb-3">
+                <span>Phí vận chuyển:</span>
+                <span class="shipping">(thỏa thuận)</span>
+              </div>
+              <hr>
+              <div class="d-flex justify-content-between mb-4">
+                <strong>Tổng cộng:</strong>
+                <strong class="total">0 VNĐ</strong>
+              </div>
+              <button class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#paymentModal">
+                Thanh toán ngay
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Payment Modal -->
+    <div class="modal fade" id="paymentModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Thông tin thanh toán</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form id="paymentForm">
+              <div class="mb-3">
+                <label class="form-label">Họ và tên</label>
+                <input type="text" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Số điện thoại</label>
+                <input type="tel" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Địa chỉ giao hàng</label>
+                <textarea class="form-control" rows="3" required></textarea>
+              </div>
+              <div class="mb-4">
+                <label class="form-label">Phương thức thanh toán</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="payment" value="cod" checked>
+                  <label class="form-check-label">Thanh toán khi nhận hàng (COD)</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="payment" value="bank_transfer">
+                  <label class="form-check-label">Chuyển khoản ngân hàng</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="payment" value="credit_card">
+                  <label class="form-check-label">Thẻ tín dụng/Ghi nợ</label>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Xác nhận đặt hàng</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5 mt-5">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <h5 class="fw-bold mb-4">Về Zofal</h5>
+            <p class="text-white-50">
+              Zofal là thương hiệu thời trang hàng đầu Việt Nam, cung cấp những
+              sản phẩm thời trang chất lượng cao với giá cả hợp lý.
+            </p>
+            <div class="social-links mt-4">
+              <a href="#" class="text-white me-3"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="text-white me-3"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="text-white me-3"
+                ><i class="fab fa-tiktok"></i
+              ></a>
+              <a href="#" class="text-white"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="fw-bold mb-4">Liên kết nhanh</h5>
+            <ul class="list-unstyled">
+              <li class="mb-3">
+                <a href="../index.html" class="text-white-50 text-decoration-none">
+                  <i class="fas fa-chevron-right me-2"></i>Trang chủ
+                </a>
+              </li>
+              <li class="mb-3">
+                <a href="sanpham.html" class="text-white-50 text-decoration-none">
+                  <i class="fas fa-chevron-right me-2"></i>Sản phẩm
+                </a>
+              </li>
+              <li class="mb-3">
+                <a href="#" class="text-white-50 text-decoration-none">
+                  <i class="fas fa-chevron-right me-2"></i>Về chúng tôi
+                </a>
+              </li>
+              <li class="mb-3">
+                <a href="#" class="text-white-50 text-decoration-none">
+                  <i class="fas fa-chevron-right me-2"></i>Liên hệ
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="fw-bold mb-4">Thông tin liên hệ</h5>
+            <div class="contact-info text-white-50">
+              <p class="mb-3">
+                <i class="fas fa-map-marker-alt me-3"></i>
+                123 Đường ABC, Quận XYZ, TP.HCM
+              </p>
+              <p class="mb-3">
+                <i class="fas fa-phone-alt me-3"></i>
+                0123 456 789
+              </p>
+              <p class="mb-3">
+                <i class="fas fa-envelope me-3"></i>
+                contact@zofal.com
+              </p>
+              <p class="mb-0">
+                <i class="fas fa-clock me-3"></i>
+                Thứ 2 - Chủ nhật: 9:00 - 21:00
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

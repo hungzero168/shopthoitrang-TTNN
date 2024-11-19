@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zofal - Thời Trang Cao Cấp</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+    <!-- Thêm thư viện Hover.css để làm đẹp thanh Navigation -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css">
+    <!-- Thêm thư viện Responsive.css để hỗ trợ responsive -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/responsive.css/1.0.0/responsive.min.css">
+    <!-- jQuery first, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Toastr CSS and JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="js/script.js"></script>
+    <style>
+      
+    </style>
+    
+  </head>
+  <body>
+    <!-- Rest of the HTML remains unchanged -->
+    <!-- Top Bar -->
+    <div
+      class="top-bar py-3"
+      style="
+        background: linear-gradient(
+          45deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+      "
+    >
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <span class="text-white me-4"
+              ><i class="fas fa-phone-alt me-2"></i>0123 456 789</span
+            >
+            <span class="text-white"
+              ><i class="fas fa-envelope me-2"></i>contact@zofal.com</span
+            >
+          </div>
+          <div class="col-md-6 text-end">
+            <a href="#" class="text-white me-3"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" class="text-white me-3"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" class="text-white"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white py-4 shadow-sm">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-3">
+            <a href="index.html" style="text-decoration: none">
+              <h1
+                style="
+                  font-size: 2.5rem;
+                  font-weight: bold;
+                  margin: 0;
+                  background: linear-gradient(
+                    45deg,
+                    var(--primary-color),
+                    var(--secondary-color)
+                  );
+                  -webkit-background-clip: text;
+                  -webkit-text-fill-color: transparent;
+                "
+              >
+                ZOFAL
+              </h1>
+            </a>
+          </div>
+          <div class="col-lg-6">
+            <div class="search-bar">
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Tìm kiếm sản phẩm..."
+                  id="searchInput"
+                />
+                <button class="btn btn-primary" onclick="window.location.href='include/sanpham.html?search=' + document.getElementById('searchInput').value">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-3 text-end user-actions">
+            <a href="include/dangnhap.html" class="btn btn-outline-secondary me-2">
+              <i class="far fa-user"></i> Tài khoản
+            </a>
+            <a href="include/giohang.html" class="btn btn-primary position-relative">
+              <i class="fas fa-shopping-cart"></i>
+              <!-- Giỏ hàng -->
+              <span
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                id="cart-count"
+                >0</span
+              >
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+      <div class="container">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="nav-link px-4" href="index.html">Trang chủ</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link px-4" href="include/sanpham.html">
+                Sản phẩm <i class="fas fa-chevron-down"></i>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="include/sanpham.html?category=aokhoac">Áo khoác</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="include/sanpham.html?category=aothun">Áo thun</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="include/sanpham.html?category=quan">Quần</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="include/sanpham.html?category=vaydam">Váy đầm</a>
+                </li>
+              </ul>
+            </li>
+
+
+            <li class="nav-item">
+              <a class="nav-link px-4" href="#">Liên hệ</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Banner Section -->
+    <section class="banner">
+      <div class="container-fluid p-0">
+        <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="//im.uniqlo.com/global-cms/spa/resd99d10f8414ec6401eff0369d18ad321fr.jpg" class="d-block w-100" alt="Thời trang nữ" style="object-fit: cover; width: 100%; height: 70vh;">
+            </div>
+            <div class="carousel-item">
+              <img src="https://intphcm.com/data/upload/banner-thoi-trang-nam.jpg" class="d-block w-100" alt="Thời trang nam" style="object-fit: cover; width: 100%; height: 70vh;">
+            </div>
+            <div class="carousel-item">
+              <img src="//im.uniqlo.com/global-cms/spa/res5137dd479969be052700d3dc3c4148adfr.jpg" class="d-block w-100" alt="Thời trang trẻ em" style="object-fit: cover; width: 100%; height: 70vh;">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features py-5" style="background: linear-gradient(135deg, var(--light-bg) 0%, var(--light-bg) 100%);">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-md-3 col-sm-6" data-aos="zoom-in">
+            <div class="feature-box text-center p-4 rounded-3 shadow-sm bg-white h-100 position-relative overflow-hidden" style="transition: all 0.3s ease;">
+              <div class="feature-icon position-relative" style="z-index: 1;">
+                <i class="fas fa-truck fa-3x mb-3" style="color: var(--primary-color);"></i>
+              </div>
+              <h3 class="h5 fw-bold mb-2">Miễn phí vận chuyển</h3>
+              <p class="mb-0 text-muted">Cho đơn hàng trên 500K</p>
+              <div class="feature-hover position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); opacity: 0; transition: all 0.3s ease;"></div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6" data-aos="zoom-in" data-aos-delay="100">
+            <div class="feature-box text-center p-4 rounded-3 shadow-sm bg-white h-100 position-relative overflow-hidden" style="transition: all 0.3s ease;">
+              <div class="feature-icon position-relative" style="z-index: 1;">
+                <i class="fas fa-undo fa-3x mb-3" style="color: var(--primary-color);"></i>
+              </div>
+              <h3 class="h5 fw-bold mb-2">Đổi trả miễn phí</h3>
+              <p class="mb-0 text-muted">Trong vòng 30 ngày</p>
+              <div class="feature-hover position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); opacity: 0; transition: all 0.3s ease;"></div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6" data-aos="zoom-in" data-aos-delay="200">
+            <div class="feature-box text-center p-4 rounded-3 shadow-sm bg-white h-100 position-relative overflow-hidden" style="transition: all 0.3s ease;">
+              <div class="feature-icon position-relative" style="z-index: 1;">
+                <i class="fas fa-headset fa-3x mb-3" style="color: var(--primary-color);"></i>
+              </div>
+              <h3 class="h5 fw-bold mb-2">Hỗ trợ 24/7</h3>
+              <p class="mb-0 text-muted">Tư vấn nhiệt tình</p>
+              <div class="feature-hover position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); opacity: 0; transition: all 0.3s ease;"></div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6" data-aos="zoom-in" data-aos-delay="300">
+            <div class="feature-box text-center p-4 rounded-3 shadow-sm bg-white h-100 position-relative overflow-hidden" style="transition: all 0.3s ease;">
+              <div class="feature-icon position-relative" style="z-index: 1;">
+                <i class="fas fa-shield-alt fa-3x mb-3" style="color: var(--primary-color);"></i>
+              </div>
+              <h3 class="h5 fw-bold mb-2">Thanh toán an toàn</h3>
+              <p class="mb-0 text-muted">Bảo mật tuyệt đối</p>
+              <div class="feature-hover position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); opacity: 0; transition: all 0.3s ease;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Categories -->
+    <section class="categories py-5">
+      <div class="container">
+        <h2 class="section-title text-center mb-5">Danh mục sản phẩm</h2>
+        <div class="categories-slider">
+          <div class="px-2">
+            <div class="card h-100">
+              <a href="include/sanpham.html?category=aokhoac" class="text-decoration-none">
+                <img src="https://image.uniqlo.com/UQ/ST3/jp/imagesother/wave1_5/pufftech-ultra-light-down/24fw/common/img/men/contents-m-07.jpg" class="card-img-top" alt="Áo khoác" style="height: 300px; object-fit: cover;" />
+                <div class="card-body d-flex flex-column justify-content-center">
+                  <h3 class="card-title text-center text-dark">Áo khoác</h3>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="px-2">
+            <div class="card h-100">
+              <a href="include/sanpham.html?category=aothun" class="text-decoration-none">
+                <img src="https://image.uniqlo.com/UQ/ST3/vn/imagesgoods/473157/item/vngoods_67_473157_3x4.jpg?width=294" class="card-img-top" alt="Áo thun" style="height: 300px; object-fit: cover;" />
+                <div class="card-body d-flex flex-column justify-content-center">
+                  <h3 class="card-title text-center text-dark">Áo thun</h3>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="px-2">
+            <div class="card h-100">
+              <a href="include/sanpham.html?category=quan" class="text-decoration-none">
+                <img src="https://image.uniqlo.com/UQ/ST3/vn/imagesgoods/470542/item/vngoods_64_470542_3x4.jpg?width=294" class="card-img-top" alt="Quần" style="height: 300px; object-fit: cover;" />
+                <div class="card-body d-flex flex-column justify-content-center">
+                  <h3 class="card-title text-center text-dark">Quần</h3>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="px-2">
+            <div class="card h-100">
+              <a href="include/sanpham.html?category=vay" class="text-decoration-none">
+                <img src="//product.hstatic.net/1000378554/product/ngo02411_4d93ba2c1fa24baba48ca77e448113e9_1024x1024.jpg" class="card-img-top" alt="Váy đầm" style="height: 300px; object-fit: cover;" />
+                <div class="card-body d-flex flex-column justify-content-center">
+                  <h3 class="card-title text-center text-dark">Váy đầm</h3>
+                </div>
+              </a>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+  
+    <!-- New Products -->
+    <section class="new-products py-5">
+      <div class="container">
+        <h2 class="section-title text-center mb-5">Sản phẩm</h2>
+        <div class="row">
+          <!-- Product Card 1 -->
+          <div class="col-md-3 mb-4" data-aos="fade-up">
+            <div class="card product-card h-100">
+              <div class="position-relative">
+                <img src="https://image.uniqlo.com/UQ/ST3/vn/imagesgoods/470299/item/vngoods_09_470299.jpg?width=750" class="card-img-top" alt="Áo khoác denim" />
+                <span class="badge bg-danger position-absolute top-0 end-0 m-2">Mới</span>
+              </div>
+              <div class="card-body d-flex flex-column">
+                <h3 class="card-title h5 text-center mb-3">Áo khoác denim</h3>
+                <div class="price text-center mb-3">
+                  <span class="current text-primary fw-bold fs-4">599.000đ</span>
+                  <span class="original text-muted text-decoration-line-through ms-2">799.000đ</span>
+                </div>
+                <div class="product-actions mt-auto">
+                  <button class="btn btn-outline-secondary btn-sm me-2" title="Xem nhanh">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <button class="btn btn-outline-secondary btn-sm me-2" title="Yêu thích">
+                    <i class="far fa-heart"></i>
+                  </button>
+                  <button class="btn btn-primary btn-sm">
+                    <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Product Card 2 -->
+          <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="card product-card h-100">
+              <div class="position-relative">
+                <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/403/511/products/o1cn010jguia2k28x0jiiex2271789.jpg" class="card-img-top" alt="Áo len nữ" />
+                <span class="badge bg-danger position-absolute top-0 end-0 m-2">Mới</span>
+              </div>
+              <div class="card-body d-flex flex-column">
+                <h3 class="card-title h5 text-center mb-3">Áo len nữ</h3>
+                <div class="price text-center mb-3">
+                  <span class="current text-primary fw-bold fs-4">599.000đ</span>
+                </div>
+                <div class="product-actions mt-auto">
+                  <button class="btn btn-outline-secondary btn-sm me-2" title="Xem nhanh">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <button class="btn btn-outline-secondary btn-sm me-2" title="Yêu thích">
+                    <i class="far fa-heart"></i>
+                  </button>
+                  <button class="btn btn-primary btn-sm">
+                    <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Product Card 3 -->
+          <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="card product-card h-100">
+              <div class="position-relative">
+                <img src="https://image.uniqlo.com/UQ/ST3/vn/imagesgoods/455364/item/vngoods_69_455364.jpg?width=750" class="card-img-top" alt="Quần jogger nam" />
+                <span class="badge bg-danger position-absolute top-0 end-0 m-2">Mới</span>
+              </div>
+              <div class="card-body d-flex flex-column">
+                <h3 class="card-title h5 text-center mb-3">Quần jogger nam</h3>
+                <div class="price text-center mb-3">
+                  <span class="current text-primary fw-bold fs-4">499.000đ</span>
+                </div>
+                <div class="product-actions mt-auto">
+                  <button class="btn btn-outline-secondary btn-sm me-2" title="Xem nhanh">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <button class="btn btn-outline-secondary btn-sm me-2" title="Yêu thích">
+                    <i class="far fa-heart"></i>
+                  </button>
+                  <button class="btn btn-primary btn-sm">
+                    <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Product Card 4 -->
+          <div class="col-md-3 mb-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="card product-card h-100">
+              <div class="position-relative">
+                <img src="https://image.uniqlo.com/UQ/ST3/vn/imagesgoods/455365/item/vngoods_51_455365.jpg?width=750" class="card-img-top" alt="Chân váy nữ" />
+                <span class="badge bg-danger position-absolute top-0 end-0 m-2">Mới</span>
+              </div>
+              <div class="card-body d-flex flex-column">
+                <h3 class="card-title h5 text-center mb-3">Chân váy nữ</h3>
+                <div class="price text-center mb-3">
+                  <span class="current text-primary fw-bold fs-4">399.000đ</span>
+                </div>
+                <div class="product-actions mt-auto">
+                  <button class="btn btn-outline-secondary btn-sm me-2" title="Xem nhanh">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <button class="btn btn-outline-secondary btn-sm me-2" title="Yêu thích">
+                    <i class="far fa-heart"></i>
+                  </button>
+                  <button class="btn btn-primary btn-sm">
+                    <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5 mt-5">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <h5 class="fw-bold mb-4">Về Zofal</h5>
+            <p class="text-white-50">
+              Zofal là thương hiệu thời trang hàng đầu Việt Nam, cung cấp những
+              sản phẩm thời trang chất lượng cao với giá cả hợp lý.
+            </p>
+            <div class="social-links mt-4">
+              <a href="#" class="text-white me-3"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="text-white me-3"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="text-white me-3"
+                ><i class="fab fa-tiktok"></i
+              ></a>
+              <a href="#" class="text-white"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="fw-bold mb-4">Liên kết nhanh</h5>
+            <ul class="list-unstyled">
+              <li class="mb-3">
+                <a href="index.html" class="text-white-50 text-decoration-none">
+                  <i class="fas fa-chevron-right me-2"></i>Trang chủ
+                </a>
+              </li>
+              <li class="mb-3">
+                <a href="include/sanpham.html" class="text-white-50 text-decoration-none">
+                  <i class="fas fa-chevron-right me-2"></i>Sản phẩm
+                </a>
+              </li>
+              <li class="mb-3">
+                <a href="#" class="text-white-50 text-decoration-none">
+                  <i class="fas fa-chevron-right me-2"></i>Về chúng tôi
+                </a>
+              </li>
+              <li class="mb-3">
+                <a href="#" class="text-white-50 text-decoration-none">
+                  <i class="fas fa-chevron-right me-2"></i>Liên hệ
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="fw-bold mb-4">Thông tin liên hệ</h5>
+            <div class="contact-info text-white-50">
+              <p class="mb-3">
+                <i class="fas fa-map-marker-alt me-3"></i>
+                123 Đường ABC, Quận XYZ, TP.HCM
+              </p>
+              <p class="mb-3">
+                <i class="fas fa-phone-alt me-3"></i>
+                0123 456 789
+              </p>
+              <p class="mb-3">
+                <i class="fas fa-envelope me-3"></i>
+                contact@zofal.com
+              </p>
+              <p class="mb-0">
+                <i class="fas fa-clock me-3"></i>
+                Thứ 2 - Chủ nhật: 9:00 - 21:00
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <!-- Add menu interaction scripts -->
+    <script>
+        $(document).ready(function() {
+            // Initialize dropdowns
+            $('.ui.dropdown').dropdown();
+
+            // Initialize sidebar
+            $('.ui.sidebar').sidebar({
+                context: $('.pusher'),
+                transition: 'overlay'
+            });
+
+            // Toggle sidebar on button click
+            $('#sidebar-toggle').click(function() {
+                $('.ui.sidebar').sidebar('toggle');
+            });
+
+            // Add active class to menu items on click
+            $('.sidebar .item').click(function() {
+                $('.sidebar .item').removeClass('active');
+                $(this).addClass('active');
+            });
+
+            // Initialize popup tooltips
+            $('.menu .item').popup();
+        });
+    </script>
+
+</head>
+
+<body>
+    <div class="ui left fixed vertical menu sidebar">
+        <div class="item">
+            <h3>Admin Dashboard</h3>
+        </div>
+        <a class="active item" data-tooltip="Manage Products" data-position="right center">
+            <i class="box icon"></i>
+            Products
+        </a>
+        <a class="item" data-tooltip="Manage Orders" data-position="right center">
+            <i class="shopping cart icon"></i>
+            Orders
+        </a>
+        <a class="item" data-tooltip="Manage Users" data-position="right center">
+            <i class="users icon"></i>
+            Users
+        </a>
+        <a class="item" data-tooltip="Manage Categories & Tags" data-position="right center">
+            <i class="tags icon"></i>
+            Categories & Tags
+        </a>
+        <div class="bottom-menu">
+            <a class="item" data-tooltip="Sign Out" data-position="right center">
+                <i class="sign out icon"></i>
+                Logout
+            </a>
+        </div>
+    </div>
+
+    <div class="pusher">
+        <div class="ui top fixed menu">
+            <div class="left menu">
+                <div class="item">
+                    <button class="ui icon button" id="sidebar-toggle" data-tooltip="Toggle Menu" data-position="bottom center">
+                        <i class="bars icon"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="right menu">
+                <div class="item">
+                    <div class="ui dropdown">
+                        <div class="text">
+                            <img class="ui avatar image" src="images/admin-avatar.png">
+                            Admin
+                        </div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a class="item"><i class="user icon"></i> Profile</a>
+                            <a class="item"><i class="settings icon"></i> Settings</a>
+                            <div class="divider"></div>
+                            <a class="item"><i class="sign out icon"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="ui container">
+                <div class="ui grid">
+                    <div class="sixteen wide column">
+                        <div class="ui segment">
+                            <h2 class="ui header">Product Management</h2>
+                            
+                            <div class="ui grid">
+                                <div class="eight wide column">
+                                    <button class="ui primary button" id="addProductBtn">
+                                        <i class="plus icon"></i>Add Product
+                                    </button>
+                                    <button class="ui button" id="addPropertyBtn">
+                                        <i class="tag icon"></i>Add Property
+                                    </button>
+                                    <button class="ui button" id="syncVillaThemeBtn">
+                                        <i class="sync icon"></i>Sync VillaTheme
+                                    </button>
+                                </div>
+                                <div class="eight wide column">
+                                    <div class="ui fluid icon input">
+                                        <input type="text" placeholder="Search products..." id="searchProduct">
+                                        <i class="search icon"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ui divider"></div>
+
+                            <div class="ui form">
+                                <div class="four fields">
+                                    <div class="field">
+                                        <select name="Date" id="Date" class="ui dropdown">
+                                            <option value="date">Date</option>
+                                            <option value="name">Name</option>
+                                            <option value="sku">SKU</option>
+                                            <option value="price">Price</option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        <select name="Order" id="Order" class="ui dropdown">
+                                            <option value="ASC">Ascending</option>
+                                            <option value="DESC">Descending</option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        <select name="Category" id="Category" class="ui dropdown" multiple>
+                                            <option value="">Categories</option>
+                                        </select>
+                                    </div>
+                                    <div class="field">
+                                        <select name="Tag" id="Tag" class="ui dropdown" multiple>
+                                            <option value="">Tags</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="four fields">
+                                    <div class="field">
+                                        <label>Created Date</label>
+                                        <input type="date" id="create_date">
+                                    </div>
+                                    <div class="field">
+                                        <label>Updated Date</label>
+                                        <input type="date" id="update_date">
+                                    </div>
+                                    <div class="field">
+                                        <label>Price Range</label>
+                                        <div class="two fields">
+                                            <div class="field">
+                                                <input type="number" id="price_from" placeholder="From">
+                                            </div>
+                                            <div class="field">
+                                                <input type="number" id="price_to" placeholder="To">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <label>&nbsp;</label>
+                                        <button class="ui primary button fluid" id="filterBtn">
+                                            <i class="filter icon"></i>Apply Filters
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <table class="ui celled table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Product Name</th>
+                                        <th>SKU</th>
+                                        <th>Price</th>
+                                        <th>Featured Image</th>
+                                        <th>Gallery</th>
+                                        <th>Category</th>
+                                        <th>Tag</th>
+                                        <th class="center aligned">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="productTableBody">
+                                </tbody>
+                            </table>
+
+                            <div class="ui center aligned container">
+                                <div class="ui pagination menu">
+                                    <a class="item">
+                                        <i class="angle left icon"></i>
+                                    </a>
+                                    <a class="active item">1</a>
+                                    <a class="item">2</a>
+                                    <a class="item">3</a>
+                                    <a class="item">
+                                        <i class="angle right icon"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div class="ui modal" id="addProductPopup">
+        <i class="close icon"></i>
+        <div class="header">
+            <i class="plus icon"></i>
+            Add New Product
+        </div>
+        <div class="content">
+            <form id="AddProductForm" class="ui form">
+                <div class="two fields">
+                    <div class="field">
+                        <label>Product Name</label>
+                        <input type="text" name="product_name" placeholder="Enter product name" required>
+                    </div>
+                    <div class="field">
+                        <label>SKU</label>
+                        <input type="text" name="sku" placeholder="Enter SKU" required>
+                    </div>
+                </div>
+
+                <div class="two fields">
+                    <div class="field">
+                        <label>Price</label>
+                        <div class="ui labeled input">
+                            <label class="ui label">₫</label>
+                            <input type="number" id="product_price" name="product_price" placeholder="Enter price" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Sale Price</label>
+                        <div class="ui labeled input">
+                            <label class="ui label">₫</label>
+                            <input type="number" name="sale_price" placeholder="Enter sale price">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Featured Image</label>
+                    <div id="featuredImagePreview" class="ui small image" style="display: none;">
+                        <img src="" alt="Featured Image Preview">
+                    </div>
+                    <div class="ui action input">
+                        <input type="text" readonly placeholder="Choose file...">
+                        <input type="file" name="featured_image" accept="image/*" id="featuredImageInput">
+                        <div class="ui icon button">
+                            <i class="upload icon"></i>
+                            Upload Image
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Gallery Images</label>
+                    <div id="galleryPreview" class="ui small images"></div>
+                    <div class="ui action input">
+                        <input type="text" readonly placeholder="Choose files...">
+                        <input type="file" name="gallery_images[]" accept="image/*" multiple>
+                        <div class="ui icon button">
+                            <i class="upload icon"></i>
+                            Upload Images
+                        </div>
+                    </div>
+                </div>
+
+                <div class="two fields">
+                    <div class="field">
+                        <label>Category</label>
+                        <select name="Category" id="AddProductCategory" class="ui dropdown" multiple>
+                            <option value="">Select Categories</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Tags</label>
+                        <select name="Tag" id="AddProductTag" class="ui dropdown" multiple>
+                            <option value="">Select Tags</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="actions">
+            <div class="ui deny button">Cancel</div>
+            <div class="ui positive button" type="submit" form="AddProductForm">Add Product</div>
+        </div>
+    </div>
+
+    <div class="ui modal" id="editProductPopup">
+        <i class="close icon"></i>
+        <div class="header">
+            <i class="edit icon"></i>
+            Edit Product
+        </div>
+        <div class="scrolling content">
+            <form id="EditProductForm" class="ui form">
+                <input type="hidden" name="id" id="EditProductID">
+                
+                <div class="two fields">
+                    <div class="field">
+                        <label>Product Name</label>
+                        <input type="text" name="product_name" id="EditProductName" required>
+                    </div>
+                    <div class="field">
+                        <label>SKU</label>
+                        <input type="text" name="sku" id="EditProductSKU" required>
+                    </div>
+                </div>
+
+                <div class="two fields">
+                    <div class="field">
+                        <label>Price</label>
+                        <div class="ui labeled input">
+                            <label class="ui label">₫</label>
+                            <input type="number" step="0.01" name="product_price" id="EditProductPrice">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Sale Price</label>
+                        <div class="ui labeled input">
+                            <label class="ui label">₫</label>
+                            <input type="number" step="0.01" name="sale_price" id="EditProductSalePrice">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Featured Image</label>
+                    <img id="EditProductFeaturedImagePreview" class="ui medium bordered image" src="" alt="Featured Image">
+                    <div class="ui action input">
+                        <input type="text" readonly placeholder="Choose file...">
+                        <input type="file" name="featured_image" id="EditProductFeaturedImage" accept="image/*">
+                        <div class="ui icon button">
+                            <i class="upload icon"></i>
+                            Change Image
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label>Gallery Images</label>
+                    <div id="EditProductGalleryPreview" class="ui small images"></div>
+                    <div class="ui action input">
+                        <input type="text" readonly placeholder="Choose files...">
+                        <input type="file" name="gallery_images[]" id="EditProductGalleryImages" accept="image/*" multiple>
+                        <div class="ui icon button">
+                            <i class="upload icon"></i>
+                            Add Images
+                        </div>
+                    </div>
+                </div>
+
+                <div class="two fields">
+                    <div class="field">
+                        <label>Categories</label>
+                        <select name="category[]" id="EditProductCategory" class="ui dropdown" multiple>
+                            <option value="">Select Categories</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Tags</label>
+                        <select name="tag[]" id="EditProductTag" class="ui dropdown" multiple>
+                            <option value="">Select Tags</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="actions">
+            <div class="ui deny button">Cancel</div>
+            <div class="ui positive button" type="submit" form="EditProductForm">Save Changes</div>
+        </div>
+    </div>
+
+    <div class="ui small modal" id="addPropertyPopup">
+        <i class="close icon"></i>
+        <div class="header">
+            <i class="tag icon"></i>
+            Add Property
+        </div>
+        <div class="content">
+            <form id="AddPropertyForm" class="ui form">
+                <div class="field">
+                    <label>Property Type</label>
+                    <select name="property_type" id="propertyType" class="ui dropdown" required>
+                        <option value="">Select Type</option>
+                        <option value="category">Category</option>
+                        <option value="tag">Tag</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Property Name</label>
+                    <input type="text" name="property_name" id="propertyName" required>
+                </div>
+            </form>
+        </div>
+        <div class="actions">
+            <div class="ui deny button">Cancel</div>
+            <div class="ui positive button" type="submit" form="AddPropertyForm">Add Property</div>
+        </div>
+    </div>
+</body>
+</html>

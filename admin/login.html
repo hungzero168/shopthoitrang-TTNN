@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <style>
+        body {
+            background-color: #f9fafb;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-container {
+            max-width: 450px;
+            width: 100%;
+            padding: 20px;
+        }
+        .ui.segment {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .ui.error.message {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="ui segment">
+            <h2 class="ui center aligned header">
+                <i class="user circle icon"></i>
+                <div class="content">
+                    Admin Login
+                    <div class="sub header">Please login to access admin panel</div>
+                </div>
+            </h2>
+            <form class="ui large form" id="loginForm" novalidate>
+                <div class="field">
+                    <label>Email</label>
+                    <div class="ui left icon input">
+                        <i class="envelope icon"></i>
+                        <input type="email" name="email" id="adminEmail" placeholder="Enter your email" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Password</label>
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input type="password" name="password" id="adminPassword" placeholder="Enter your password" required>
+                    </div>
+                </div>
+                <div class="ui error message"></div>
+                <button class="ui fluid large primary submit button" type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const form = $('#loginForm');
+            const errorMessage = $('.ui.error.message');
+            const adminEmail = $('#adminEmail');
+            const adminPassword = $('#adminPassword');
+            
+            form.on('submit', function(e) {
+                e.preventDefault();
+                
+                // Clear previous error messages
+                errorMessage.hide();
+                
+                // Basic validation
+                const email = adminEmail.val().trim();
+                const password = adminPassword.val().trim();
+                
+                if (!email || !password) {
+                    errorMessage.html('Please fill in all fields').show();
+                    return;
+                }
+                
+                if (!isValidEmail(email)) {
+                    errorMessage.html('Please enter a valid email address').show();
+                    return;
+                }
+    
+                const submitButton = form.find('button[type="submit"]');
+                submitButton.addClass('loading disabled');
+                
+                $.ajax({
+                    url: 'php/login.php',
+                    type: 'POST',
+                    data: {
+                        email: email,
+                        password: password
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        if(response.status === 'success') {
+                            window.location.href = 'index.html';
+                        } else {
+                            errorMessage.html(response.message).show();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('XHR Status:', status);
+                        console.error('Error:', error);
+                        console.error('Response:', xhr.responseText);
+                        try {
+                            const response = JSON.parse(xhr.responseText);
+                            errorMessage.html(response.message || 'An error occurred. Please try again later.').show();
+                        } catch(e) {
+                            errorMessage.html('An error occurred. Please try again later.').show();
+                        }
+                    },
+                    complete: function() {
+                        submitButton.removeClass('loading disabled');
+                    }
+                });
+            });
+    
+            // Email validation helper function
+            function isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+    
+            // Clear error message when user starts typing
+            adminEmail.add(adminPassword).on('input', function() {
+                errorMessage.hide();
+            });
+        });
+    </script>
+</body>
+</html>
